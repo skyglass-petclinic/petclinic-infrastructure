@@ -57,7 +57,27 @@ resource "kubernetes_ingress_v1" "ingress" {
           path_type = "Prefix"
         }
       }
-    }    
+    }
+
+    rule {
+      host = "pet.greeta.net"
+      http {
+
+        path {
+          backend {
+            service {
+              name = "petclinic-service"
+              port {
+                number = 8080
+              }
+            }
+          }
+
+          path = "/"
+          path_type = "Prefix"
+        }
+      }
+    }
 
   }
 }

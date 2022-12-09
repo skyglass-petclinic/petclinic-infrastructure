@@ -30,5 +30,22 @@ resource "kubernetes_pod_v1" "app2" {
       args  = ["-text=Hello from my app 2"]
     }
   }
+
+}
+
+resource "kubernetes_pod_v1" "petclinic" {
+    metadata {
+      name = "petclinic"
+      labels = {
+        "app" = "petclinic"
+      }
+    }
+
+    spec {
+      container {
+        image = "skyglass/petclinic:master"
+        name  = "petclinic"
+      }
+    }
 }
 

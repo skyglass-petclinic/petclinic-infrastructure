@@ -12,6 +12,7 @@ resource "kubernetes_service_v1" "app1_service" {
   }
 }
 
+
 resource "kubernetes_service_v1" "app2_service" {
   metadata {
     name = "my-app2-service"
@@ -22,6 +23,21 @@ resource "kubernetes_service_v1" "app2_service" {
     }
     port {
       port = 5678
+    }
+  }
+}
+
+
+resource "kubernetes_service_v1" "petclinic_service" {
+  metadata {
+    name = "petclinic-service"
+  }
+  spec {
+    selector = {
+      app = kubernetes_pod_v1.petclinic.metadata.0.labels.app
+    }
+    port {
+      port = 8080
     }
   }
 }
